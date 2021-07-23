@@ -5,6 +5,8 @@ import { FaCheck } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
   const [title, setTitle] = useState('');
@@ -16,6 +18,14 @@ const Home = () => {
     getTasks();
   }, []);
 
+  const notify = () =>
+    toast('Tarefa criada com sucesso!', {
+      type: 'success',
+      autoClose: 4000,
+      closeOnClick: true,
+      pauseOnHover: true,
+    });
+
   const saveTask = async () => {
     const task = await axios.post('https://task-list-back.herokuapp.com/todo', {
       title,
@@ -23,7 +33,7 @@ const Home = () => {
       date,
     });
     getTasks();
-    alert('Salvo com sucesso');
+    notify();
   };
 
   const getTasks = async () => {
@@ -40,6 +50,7 @@ const Home = () => {
 
   return (
     <div className="container-home">
+      <ToastContainer />
       <div className="subcontainer-home">
         <div className="container-left">
           <h1>Task List</h1>
