@@ -17,7 +17,7 @@ const Home = () => {
   }, []);
 
   const saveTask = async () => {
-    const task = await axios.post('http://localhost:3333/todo', {
+    const task = await axios.post('https://task-list-back.herokuapp.com/todo', {
       title,
       description,
       date,
@@ -27,12 +27,12 @@ const Home = () => {
   };
 
   const getTasks = async () => {
-    const tasks = await axios.get('http://localhost:3333/todo');
+    const tasks = await axios.get('https://task-list-back.herokuapp.com/todo');
     setTasksBD(tasks.data);
   };
 
   const updateTask = async (id, status) => {
-    await axios.put(`http://localhost:3333/todo/${id}`, {
+    await axios.put(`https://task-list-back.herokuapp.com/todo/${id}`, {
       status: !status,
     });
     getTasks();

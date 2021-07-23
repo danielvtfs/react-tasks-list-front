@@ -28,7 +28,9 @@ const Details = ({ history }) => {
     });
 
   const getTask = async () => {
-    const task = await axios.get(`http://localhost:3333/todo/${id}`);
+    const task = await axios.get(
+      `https://task-list-back.herokuapp.com/todo/${id}`
+    );
     setTitle(task.data.title);
     setDescription(task.data.description);
     const formattedDate = new Date(task.data.date);
@@ -36,13 +38,13 @@ const Details = ({ history }) => {
   };
 
   const removeTask = async () => {
-    await axios.delete(`http://localhost:3333/todo/${id}`);
+    await axios.delete(`https://task-list-back.herokuapp.com/todo/${id}`);
     alert('usuário deletado com sucesso!');
     history.push('/');
   };
 
   const updateTask = async () => {
-    await axios.put(`http://localhost:3333/todo/${id}`, {
+    await axios.put(`https://task-list-back.herokuapp.com/todo/${id}`, {
       title,
       description,
       date,
